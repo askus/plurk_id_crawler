@@ -28,9 +28,11 @@ i= 0
 for l in infile:
 	tmp = l.strip().split("\t")
 	userid = tmp[0]
+	try:
+		temp = plurk.callAPI("/APP/Profile/getPublicProfile", {"user_id": userid})
+	except:
+		continue
 
-	temp = plurk.callAPI("/APP/Profile/getPublicProfile", {"user_id": userid})
-	
 	print "[%s][%.2f] %d/%d" %( filename_prefix  , ( float(i)/ float(total_length) ) , i, total_length )  
 	i +=1 
 	if not temp == None:
